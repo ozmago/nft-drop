@@ -18,7 +18,7 @@ import { useState } from 'react';
 import styles from '../styles/Theme.module.css';
 
 // Put Your NFT Drop Contract address from the dashboard here
-const myNftDropContractAddress = '0x322067594DBCE69A9a9711BC393440aA5e3Aaca1';
+const myNftDropContractAddress = '0x0C0124C5185aee767c1c4cd2e24dBfb84991aa16';
 
 const Home: NextPage = () => {
   const nftDrop = useNFTDrop(myNftDropContractAddress);
@@ -89,6 +89,9 @@ const Home: NextPage = () => {
   };
 
   return (
+    <div className={styles.hero}>
+
+
     <div className={styles.container}>
       <div className={styles.mintInfoContainer}>
         <div className={styles.infoSide}>
@@ -216,12 +219,13 @@ const Home: NextPage = () => {
         </div>
       </div>
       {/* Powered by thirdweb */}{' '}
-      <img
+{/*       <img
         src="/logo.png"
         alt="thirdweb Logo"
         width={135}
         className={styles.buttonGapTop}
-      />
+      /> */}
+    </div>
     </div>
   );
 };
