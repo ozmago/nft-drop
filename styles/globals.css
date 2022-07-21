@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Change the values in here to match your branding */
 :root {
@@ -29,7 +32,8 @@ body {
   background: var(--background-color);
   font-family: var(--font);
   color: var(--text-color);
-
+  height: 100vh;
+  width: 100vw;
   display: flex;
   margin: 0;
   text-align: center;

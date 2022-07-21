@@ -16,6 +16,7 @@ import { formatUnits, parseUnits } from 'ethers/lib/utils';
 import type { NextPage } from 'next';
 import { useState } from 'react';
 import styles from '../styles/Theme.module.css';
+import NavBar from '../components/NavBar';
 
 // Put Your NFT Drop Contract address from the dashboard here
 const myNftDropContractAddress = '0x0C0124C5185aee767c1c4cd2e24dBfb84991aa16';
@@ -89,10 +90,8 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className={styles.hero}>
-
-
-    <div className={styles.container}>
+    <div className="">
+    <div className="bg-[url('/hero.png')] bg-cover bg-no-repeat w-screen h-screen" >
       <div className={styles.mintInfoContainer}>
         <div className={styles.infoSide}>
           {/* Title of your NFT Collection */}
@@ -225,6 +224,16 @@ const Home: NextPage = () => {
         width={135}
         className={styles.buttonGapTop}
       /> */}
+    </div>
+    <div className='flex justify-center items-center gap-24 p-24'>
+      <img src='/article1.png' className='h-80 w-80'/>
+      <ul className='flex flex-col gap-4'>
+        <li className='font-bold'>10,000 initial supply</li>
+        <li className='font-bold'>10,000 initial supply</li>
+        <li className='font-bold'>10,000 initial supply</li>
+        <li className='font-bold'>10,000 initial supply</li>
+        <li className='font-bold'>10,000 initial supply</li>
+      </ul>
     </div>
     </div>
   );
