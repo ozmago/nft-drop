@@ -9,17 +9,17 @@ import {
   useClaimNFT,
   useWalletConnect,
   useCoinbaseWallet,
-} from '@thirdweb-dev/react';
-import { useNetworkMismatch } from '@thirdweb-dev/react';
-import { useAddress, useMetamask } from '@thirdweb-dev/react';
-import { formatUnits, parseUnits } from 'ethers/lib/utils';
-import type { NextPage } from 'next';
-import { useState } from 'react';
-import styles from '../styles/Theme.module.css';
-import NavBar from '../components/NavBar';
+} from "@thirdweb-dev/react";
+import { useNetworkMismatch } from "@thirdweb-dev/react";
+import { useAddress, useMetamask } from "@thirdweb-dev/react";
+import { formatUnits, parseUnits } from "ethers/lib/utils";
+import type { NextPage } from "next";
+import { useState } from "react";
+import styles from "../styles/Theme.module.css";
+import NavBar from "../components/NavBar";
 
 // Put Your NFT Drop Contract address from the dashboard here
-const myNftDropContractAddress = '0xa73657b8DfC5a5538d57847B2E16d18127fDE2bb';
+const myNftDropContractAddress = "0xa73657b8DfC5a5538d57847B2E16d18127fDE2bb";
 
 const Home: NextPage = () => {
   const nftDrop = useNFTDrop(myNftDropContractAddress);
@@ -36,7 +36,7 @@ const Home: NextPage = () => {
 
   // Load contract metadata
   const { data: contractMetadata } = useContractMetadata(
-    myNftDropContractAddress,
+    myNftDropContractAddress
   );
 
   // Load claimed supply and unclaimed supply
@@ -56,8 +56,8 @@ const Home: NextPage = () => {
 
   // Check price
   const price = parseUnits(
-    activeClaimCondition?.currencyMetadata.displayValue || '0',
-    activeClaimCondition?.currencyMetadata.decimals,
+    activeClaimCondition?.currencyMetadata.displayValue || "0",
+    activeClaimCondition?.currencyMetadata.decimals
   );
 
   // Multiply depending on quantity
@@ -79,206 +79,211 @@ const Home: NextPage = () => {
       { to: address as string, quantity },
       {
         onSuccess: () => {
-          alert(`Successfully minted NFT${quantity > 1 ? 's' : ''}!`);
+          alert(`Successfully minted NFT${quantity > 1 ? "s" : ""}!`);
         },
         onError: (err: any) => {
           console.error(err);
-          alert(err?.message || 'Something went wrong');
+          alert(err?.message || "Something went wrong");
         },
-      },
+      }
     );
   };
 
   return (
-    <div className="">
-    <div className="bg-[url('/hero.png')] bg-cover bg-no-repeat w-screen h-screen" >
-    <div className='flex justify-center items-center gap-24 p-24'>
-      <h1 className="text-7xl font-mono">Moonclaws</h1>
-    </div>
-      <div className={styles.mintInfoContainer}>
-        <div className={styles.infoSide}>
-          {/* Title of your NFT Collection */}
-          <h1>{contractMetadata?.name}</h1>
-          {/* Description of your NFT Collection */}
-          <p className={styles.description}>{contractMetadata?.description}</p>
+    <div className="bg-indigo-900 w-full">
+      <div className="bg-[url('/hero.png')] bg-cover bg-no-repeat">
+        <div className="flex justify-center items-center gap-24 p-24">
+          <h1 className="text-7xl font-mono">Moonclaws</h1>
         </div>
-
-        <div className={styles.imageSide}>
-          {/* Image Preview of NFTs */}
-          <img
-            className={styles.image}
-            src={contractMetadata?.image}
-            alt={`${contractMetadata?.name} preview image`}
-          />
-
-          {/* Amount claimed so far */}
-          <div className={styles.mintCompletionArea}>
-            <div className={styles.mintAreaLeft}>
-              <p>Total Minted</p>
-            </div>
-            <div className={styles.mintAreaRight}>
-              {claimedSupply && unclaimedSupply ? (
-                <p>
-                  {/* Claimed supply so far */}
-                  <b>{claimedSupply?.toNumber()}</b>
-                  {' / '}
-                  {
-                    // Add unclaimed and claimed supply to get the total supply
-                    claimedSupply?.toNumber() + unclaimedSupply?.toNumber()
-                  }
-                </p>
-              ) : (
-                // Show loading state if we're still loading the supply
-                <p>Loading...</p>
-              )}
-            </div>
+        <div className='flex flex-row items-center justify-between'>
+          <div className=''>
+            {/* Title of your NFT Collection */}
+            <h1>{contractMetadata?.name}</h1>
+            {/* Description of your NFT Collection */}
+            <p className={styles.description}>
+              {contractMetadata?.description}
+            </p>
           </div>
 
-          {/* Show claim button or connect wallet button */}
-          {address ? (
-            // Sold out or show the claim button
-            isSoldOut ? (
-              <div>
-                <h2>Sold Out</h2>
-              </div>
-            ) : isNotReady ? (
-              <div>
-                <h2>Not ready to be minted yet</h2>
-              </div>
-            ) : (
-              <>
-                <p>Quantity</p>
-                <div className={styles.quantityContainer}>
-                  <button
-                    className={`${styles.quantityControlButton}`}
-                    onClick={() => setQuantity(quantity - 1)}
-                    disabled={quantity <= 1}
-                  >
-                    -
-                  </button>
+          <div className={styles.imageSide}>
+            {/* Image Preview of NFTs */}
+            <img
+              className={styles.image}
+              src={contractMetadata?.image}
+              alt={`${contractMetadata?.name} preview image`}
+            />
 
-                  <h4>{quantity}</h4>
-
-                  <button
-                    className={`${styles.quantityControlButton}`}
-                    onClick={() => setQuantity(quantity + 1)}
-                    disabled={
-                      quantity >=
-                      parseInt(
-                        activeClaimCondition?.quantityLimitPerTransaction ||
-                          '0',
-                      )
+            {/* Amount claimed so far */}
+            <div className={styles.mintCompletionArea}>
+              <div className={styles.mintAreaLeft}>
+                <p>Total Minted</p>
+              </div>
+              <div className={styles.mintAreaRight}>
+                {claimedSupply && unclaimedSupply ? (
+                  <p>
+                    {/* Claimed supply so far */}
+                    <b>{claimedSupply?.toNumber()}</b>
+                    {" / "}
+                    {
+                      // Add unclaimed and claimed supply to get the total supply
+                      claimedSupply?.toNumber() + unclaimedSupply?.toNumber()
                     }
-                  >
-                    +
-                  </button>
-                </div>
-
-                <button
-                  className={`${styles.mainButton} ${styles.spacerTop} ${styles.spacerBottom}`}
-                  onClick={mint}
-                  disabled={claimNFT.isLoading}
-                >
-                  {claimNFT.isLoading
-                    ? 'Minting...'
-                    : `Mint${quantity > 1 ? ` ${quantity}` : ''}${
-                        activeClaimCondition?.price.eq(0)
-                          ? ' (Free)'
-                          : activeClaimCondition?.currencyMetadata.displayValue
-                          ? ` (${formatUnits(
-                              priceToMint,
-                              activeClaimCondition.currencyMetadata.decimals,
-                            )} ${
-                              activeClaimCondition?.currencyMetadata.symbol
-                            })`
-                          : ''
-                      }`}
-                </button>
-              </>
-            )
-          ) : (
-            <div className={styles.buttons}>
-              <button
-                className={styles.mainButton}
-                onClick={connectWithMetamask}
-              >
-                Connect MetaMask
-              </button>
-              <button
-                className={styles.mainButton}
-                onClick={connectWithWalletConnect}
-              >
-                Connect with Wallet Connect
-              </button>
-              <button
-                className={styles.mainButton}
-                onClick={connectWithCoinbaseWallet}
-              >
-                Connect with Coinbase Wallet
-              </button>
+                  </p>
+                ) : (
+                  // Show loading state if we're still loading the supply
+                  <p>Loading...</p>
+                )}
+              </div>
             </div>
-          )}
+
+            {/* Show claim button or connect wallet button */}
+            {address ? (
+              // Sold out or show the claim button
+              isSoldOut ? (
+                <div>
+                  <h2>Sold Out</h2>
+                </div>
+              ) : isNotReady ? (
+                <div>
+                  <h2>Not ready to be minted yet</h2>
+                </div>
+              ) : (
+                <>
+                  <p>Quantity</p>
+                  <div className={styles.quantityContainer}>
+                    <button
+                      className={`${styles.quantityControlButton}`}
+                      onClick={() => setQuantity(quantity - 1)}
+                      disabled={quantity <= 1}
+                    >
+                      -
+                    </button>
+
+                    <h4>{quantity}</h4>
+
+                    <button
+                      className={`${styles.quantityControlButton}`}
+                      onClick={() => setQuantity(quantity + 1)}
+                      disabled={
+                        quantity >=
+                        parseInt(
+                          activeClaimCondition?.quantityLimitPerTransaction ||
+                            "0"
+                        )
+                      }
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <button
+                    className={`${styles.mainButton} ${styles.spacerTop} ${styles.spacerBottom}`}
+                    onClick={mint}
+                    disabled={claimNFT.isLoading}
+                  >
+                    {claimNFT.isLoading
+                      ? "Minting..."
+                      : `Mint${quantity > 1 ? ` ${quantity}` : ""}${
+                          activeClaimCondition?.price.eq(0)
+                            ? " (Free)"
+                            : activeClaimCondition?.currencyMetadata
+                                .displayValue
+                            ? ` (${formatUnits(
+                                priceToMint,
+                                activeClaimCondition.currencyMetadata.decimals
+                              )} ${
+                                activeClaimCondition?.currencyMetadata.symbol
+                              })`
+                            : ""
+                        }`}
+                  </button>
+                </>
+              )
+            ) : (
+              <div className={styles.buttons}>
+                <button
+                  className={styles.mainButton}
+                  onClick={connectWithMetamask}
+                >
+                  Connect MetaMask
+                </button>
+                <button
+                  className={styles.mainButton}
+                  onClick={connectWithWalletConnect}
+                >
+                  Connect with Wallet Connect
+                </button>
+                <button
+                  className={styles.mainButton}
+                  onClick={connectWithCoinbaseWallet}
+                >
+                  Connect with Coinbase Wallet
+                </button>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-      {/* Powered by thirdweb */}{' '}
-{/*       <img
+        {/* Powered by thirdweb */}{" "}
+        {/*       <img
         src="/logo.png"
         alt="thirdweb Logo"
         width={135}
         className={styles.buttonGapTop}
       /> */}
-</div>
-      {/* About section */}
-    
-    <div className='bg-indigo-900	'>
-    <div className='flex justify-center items-center gap-24 p-24'>
-      <div className='h-50 w-50'>
-      <img src='/article1.png' />
       </div>
-      <ul className='flex flex-col gap-4'>
-        <li className='font-bold'>10,000 initial supply</li>
-        <li className='font-bold'>10,000 initial supply</li>
-        <li className='font-bold'>10,000 initial supply</li>
-        <li className='font-bold'>10,000 initial supply</li>
-        <li className='font-bold'>10,000 initial supply</li>
-      </ul>
+      {/* About section */}
+
+      <div className="flex flex-wrap justify-center items-center gap-24 p-24">
+        <div className="w-96">
+          <img className="h-full w-full" src="/article1.png" />
+        </div>
+        <ul className="flex flex-col gap-4">
+          <li className="font-bold list-disc">10,000 initial supply</li>
+          <li className="font-bold list-disc">10,000 initial supply</li>
+          <li className="font-bold list-disc">10,000 initial supply</li>
+          <li className="font-bold list-disc">10,000 initial supply</li>
+          <li className="font-bold list-disc ">10,000 initial supply</li>
+        </ul>
+      </div>
+
+      {/* More Info */}
+
+      <div className="flex flex-wrap justify-center items-center gap-24 p-24">
+        <div className="flex flex-col gap-10">
+          <h2 className='text-2xl font-bold '>The Moonrunners are taking over</h2>
+          <p className='max-w-md'>
+            A collection of 10,000 handcrafted PFPs. For the longest time, this
+            Wolfpack lived in harmony and peace on Primordia among humankind,
+            but one month would change the course of history forever and now the
+            Crimson full moon is coming once again...
+          </p>
+        </div>
+        <div className="w-96">
+          <img className="h-full w-full" src="/article1.png" />
+        </div>
+      </div>
+
+      {/* FAQs */}
+      <div className="	">
+        <h2>FAQs</h2>
+        <div className="flex justify-center items-center gap-24 p-24">
+          <ul className="flex flex-col gap-4 ">
+            <li className="font-bold">10,000 initial supply</li>
+            <li className="font-bold">10,000 initial supply</li>
+            <li className="font-bold">10,000 initial supply</li>
+            <li className="font-bold">10,000 initial supply</li>
+            <li className="font-bold">10,000 initial supply</li>
+          </ul>
+          <ul className="flex flex-col gap-4">
+            <li className="font-bold">10,000 initial supply</li>
+            <li className="font-bold">10,000 initial supply</li>
+            <li className="font-bold">10,000 initial supply</li>
+            <li className="font-bold">10,000 initial supply</li>
+            <li className="font-bold">10,000 initial supply</li>
+          </ul>
+        </div>
+      </div>
     </div>
-    </div>
-{/* More Info */}
-<div className='bg-indigo-900	'>
-<div className='flex justify-center items-center gap-24 p-24'>
-<ul className='flex flex-col gap-4'>
-    <li className='font-bold'>10,000 initial supply</li>
-    <li className='font-bold'>10,000 initial supply</li>
-    <li className='font-bold'>10,000 initial supply</li>
-    <li className='font-bold'>10,000 initial supply</li>
-    <li className='font-bold'>10,000 initial supply</li>
-  </ul>
-  <img src='/article1.png' className='h-80 w-80'/>
-</div>
-</div>
-{/* FAQs */}
-<div className='bg-indigo-900	'>
-<h2>FAQs</h2>
-<div className='flex justify-center items-center gap-24 p-24'>
-  
-<ul className='flex flex-col gap-4 '>
-    <li className='font-bold'>10,000 initial supply</li>
-    <li className='font-bold'>10,000 initial supply</li>
-    <li className='font-bold'>10,000 initial supply</li>
-    <li className='font-bold'>10,000 initial supply</li>
-    <li className='font-bold'>10,000 initial supply</li>
-  </ul>
-  <ul className='flex flex-col gap-4'>
-    <li className='font-bold'>10,000 initial supply</li>
-    <li className='font-bold'>10,000 initial supply</li>
-    <li className='font-bold'>10,000 initial supply</li>
-    <li className='font-bold'>10,000 initial supply</li>
-    <li className='font-bold'>10,000 initial supply</li>
-  </ul>
-</div>
-</div>
-</div>
   );
 };
 
