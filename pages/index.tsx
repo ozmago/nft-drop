@@ -19,7 +19,7 @@ import styles from '../styles/Theme.module.css';
 import NavBar from '../components/NavBar';
 
 // Put Your NFT Drop Contract address from the dashboard here
-const myNftDropContractAddress = '0x0C0124C5185aee767c1c4cd2e24dBfb84991aa16';
+const myNftDropContractAddress = '0xa73657b8DfC5a5538d57847B2E16d18127fDE2bb';
 
 const Home: NextPage = () => {
   const nftDrop = useNFTDrop(myNftDropContractAddress);
@@ -92,6 +92,9 @@ const Home: NextPage = () => {
   return (
     <div className="">
     <div className="bg-[url('/hero.png')] bg-cover bg-no-repeat w-screen h-screen" >
+    <div className='flex justify-center items-center gap-24 p-24'>
+      <h1 className="text-7xl font-mono">Moonclaws</h1>
+    </div>
       <div className={styles.mintInfoContainer}>
         <div className={styles.infoSide}>
           {/* Title of your NFT Collection */}
@@ -224,9 +227,14 @@ const Home: NextPage = () => {
         width={135}
         className={styles.buttonGapTop}
       /> */}
-    </div>
+</div>
+      {/* About section */}
+    
+    <div className='bg-indigo-900	'>
     <div className='flex justify-center items-center gap-24 p-24'>
-      <img src='/article1.png' className='h-80 w-80'/>
+      <div className='h-50 w-50'>
+      <img src='/article1.png' />
+      </div>
       <ul className='flex flex-col gap-4'>
         <li className='font-bold'>10,000 initial supply</li>
         <li className='font-bold'>10,000 initial supply</li>
@@ -236,6 +244,41 @@ const Home: NextPage = () => {
       </ul>
     </div>
     </div>
+{/* More Info */}
+<div className='bg-indigo-900	'>
+<div className='flex justify-center items-center gap-24 p-24'>
+<ul className='flex flex-col gap-4'>
+    <li className='font-bold'>10,000 initial supply</li>
+    <li className='font-bold'>10,000 initial supply</li>
+    <li className='font-bold'>10,000 initial supply</li>
+    <li className='font-bold'>10,000 initial supply</li>
+    <li className='font-bold'>10,000 initial supply</li>
+  </ul>
+  <img src='/article1.png' className='h-80 w-80'/>
+</div>
+</div>
+{/* FAQs */}
+<div className='bg-indigo-900	'>
+<h2>FAQs</h2>
+<div className='flex justify-center items-center gap-24 p-24'>
+  
+<ul className='flex flex-col gap-4 '>
+    <li className='font-bold'>10,000 initial supply</li>
+    <li className='font-bold'>10,000 initial supply</li>
+    <li className='font-bold'>10,000 initial supply</li>
+    <li className='font-bold'>10,000 initial supply</li>
+    <li className='font-bold'>10,000 initial supply</li>
+  </ul>
+  <ul className='flex flex-col gap-4'>
+    <li className='font-bold'>10,000 initial supply</li>
+    <li className='font-bold'>10,000 initial supply</li>
+    <li className='font-bold'>10,000 initial supply</li>
+    <li className='font-bold'>10,000 initial supply</li>
+    <li className='font-bold'>10,000 initial supply</li>
+  </ul>
+</div>
+</div>
+</div>
   );
 };
 
