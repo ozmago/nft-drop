@@ -4,7 +4,7 @@ import "../styles/globals.css";
 import Head from "next/head";
 import ThirdwebGuideFooter from "../components/GitHubLink";
 import NavBar from "../components/NavBar";
-
+import Footer from "../components/Footer";
 
 // This is the chainId your dApp will work on.
 const activeChainId = ChainId.Rinkeby;
@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <NavBar />
       <Component {...pageProps} />
-{/*       <ThirdwebGuideFooter /> */}
+      {/*       <ThirdwebGuideFooter /> */}
     </ThirdwebProvider>
   );
 }

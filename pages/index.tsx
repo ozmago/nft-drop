@@ -16,7 +16,7 @@ import { formatUnits, parseUnits } from "ethers/lib/utils";
 import type { NextPage } from "next";
 import { useState } from "react";
 import styles from "../styles/Theme.module.css";
-import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 // Put Your NFT Drop Contract address from the dashboard here
 const myNftDropContractAddress = "0xa73657b8DfC5a5538d57847B2E16d18127fDE2bb";
@@ -95,10 +95,10 @@ const Home: NextPage = () => {
         <div className="flex justify-center items-center gap-24 p-24">
           <h1 className="text-7xl font-mono">Moonclaws</h1>
         </div>
-        <div className='flex flex-row items-center justify-between'>
-          <div className=''>
+        <div className="flex flex-row flex-wrap items-center justify-center gap-32">
+          <div className="">
             {/* Title of your NFT Collection */}
-            <h1>{contractMetadata?.name}</h1>
+            <h1 className="text-xl font-semibold">{contractMetadata?.name}</h1>
             {/* Description of your NFT Collection */}
             <p className={styles.description}>
               {contractMetadata?.description}
@@ -250,8 +250,10 @@ const Home: NextPage = () => {
 
       <div className="flex flex-wrap justify-center items-center gap-24 p-24">
         <div className="flex flex-col gap-10">
-          <h2 className='text-2xl font-bold '>The Moonrunners are taking over</h2>
-          <p className='max-w-md'>
+          <h2 className="text-3xl font-bold ">
+            The Moonrunners are taking over
+          </h2>
+          <p className="max-w-md">
             A collection of 10,000 handcrafted PFPs. For the longest time, this
             Wolfpack lived in harmony and peace on Primordia among humankind,
             but one month would change the course of history forever and now the
@@ -264,25 +266,48 @@ const Home: NextPage = () => {
       </div>
 
       {/* FAQs */}
-      <div className="	">
-        <h2>FAQs</h2>
-        <div className="flex justify-center items-center gap-24 p-24">
-          <ul className="flex flex-col gap-4 ">
-            <li className="font-bold">10,000 initial supply</li>
-            <li className="font-bold">10,000 initial supply</li>
-            <li className="font-bold">10,000 initial supply</li>
-            <li className="font-bold">10,000 initial supply</li>
-            <li className="font-bold">10,000 initial supply</li>
-          </ul>
-          <ul className="flex flex-col gap-4">
-            <li className="font-bold">10,000 initial supply</li>
-            <li className="font-bold">10,000 initial supply</li>
-            <li className="font-bold">10,000 initial supply</li>
-            <li className="font-bold">10,000 initial supply</li>
-            <li className="font-bold">10,000 initial supply</li>
-          </ul>
+      <h2 className="text-3xl font-bold mb-16">FAQs</h2>
+      <div className="flex justify-center">
+        <div className="flex flex-row flex-wrap gap-24 justify-center">
+          <div className="max-w-md flex flex-col gap-10">
+            <div>
+              <h3 className="font-bold text-lg text-left mb-4">
+                Is there a Discord?
+              </h3>
+              <p className="text-left">
+                No, we are a Twitter focused project. We wanted to cut out the
+                noise and need to go to Discord to stay up to date.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-bold text-lg text-left">
+                Is there a Discord?
+              </h3>
+              <p className="text-left">
+                No, we are a Twitter focused project. We wanted to cut out the
+                noise and need to go to Discord to stay up to date.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-bold text-lg text-left">
+                Is there a Discord?
+              </h3>
+              <p className="text-left">
+                No, we are a Twitter focused project. We wanted to cut out the
+                noise and need to go to Discord to stay up to date.
+              </p>
+            </div>
+          </div>
+          <div className="max-w-md">
+            <h3 className="font-bold text-lg">Is there a Discord?</h3>
+            <p>
+              No, we are a Twitter focused project. We wanted to cut out the
+              noise and need to go to Discord to stay up to date.
+            </p>
+          </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
